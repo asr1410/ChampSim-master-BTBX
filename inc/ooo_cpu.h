@@ -38,15 +38,6 @@ struct BTB_outcome {
 // cpu
 class O3_CPU {
   public:
-    long long int trb[512] = {0};
-  long long int tif[512] = {0};
-  long long int prb[512] = {0};
-  long long int pif[512] = {0};
-  long long int crb[512] = {0};
-  long long int cif[512] = {0};
-  long long int wc[512] = {0};
-  long long int lic = 0;
-  long long int gic = 0;
 	bool skip_next_cycle;
     uint32_t cpu;
 
@@ -69,7 +60,6 @@ class O3_CPU {
     uint32_t next_ITLB_fetch;
 
     // reorder buffer, load/store queue, register file
-    CORE_BUFFER IFETCH_BUFFER{"IFETCH_BUFFER", FETCH_WIDTH*2};
     CORE_BUFFER IFETCH_BUFFER{"IFETCH_BUFFER", 128};
     CORE_BUFFER DECODE_BUFFER{"DECODE_BUFFER", DECODE_WIDTH*3};
     CORE_BUFFER ROB{"ROB", ROB_SIZE};
@@ -275,13 +265,6 @@ class O3_CPU {
   void l1i_prefetcher_cache_fill(uint64_t v_addr, uint32_t set, uint32_t way, uint8_t prefetch, uint64_t evicted_v_addr);
   void l1i_prefetcher_final_stats();
   int prefetch_code_line(uint64_t pf_v_addr); 
-    ~O3_CPU() {
-    cout << "total instructions: " << gic << endl;
-    cout << "wc,tif,trb" << endl;
-    for(int i = 0; i < 512; i++) {
-        cout << wc[i] << "," << tif[i] << "," << trb[i] << endl;
-    }
-  }
 };
 
 extern O3_CPU ooo_cpu[NUM_CPUS];
