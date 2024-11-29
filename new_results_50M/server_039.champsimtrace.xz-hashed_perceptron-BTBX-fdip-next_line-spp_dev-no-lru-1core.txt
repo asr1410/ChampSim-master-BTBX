@@ -1,0 +1,794 @@
+Initialize SIGNATURE TABLE
+ST_SET: 1
+ST_WAY: 256
+ST_TAG_BIT: 16
+ST_TAG_MASK: ffff
+
+Initialize PATTERN TABLE
+PT_SET: 512
+PT_WAY: 4
+SIG_DELTA_BIT: 7
+C_SIG_BIT: 4
+C_DELTA_BIT: 4
+
+Initialize PREFETCH FILTER
+FILTER_SET: 1024
+
+*** ChampSim Multicore Out-of-Order Simulator ***
+
+Warmup Instructions: 50000000
+Simulation Instructions: 50000000
+Number of CPUs: 1
+LLC sets: 2048
+LLC ways: 16
+Off-chip DRAM Size: 4096 MB Channels: 1 Width: 64-bit Data Rate: 3200 MT/s
+
+CPU 0 runs /ChampSim-master-BTBX/dpc3_traces/server_039.champsimtrace.xz
+Basic BTB sets: 4096 ways: 4 indirect buffer size: 4096 RAS size: 64
+CPU 0 L1D next line prefetcher
+Heartbeat CPU 0 instructions: 10000003 cycles: 3452714 heartbeat IPC: 2.89627 cumulative IPC: 2.89627 (Simulation time: 0 hr 0 min 19 sec) 
+Heartbeat CPU 0 instructions: 20000002 cycles: 6898434 heartbeat IPC: 2.90215 cumulative IPC: 2.89921 (Simulation time: 0 hr 0 min 38 sec) 
+Heartbeat CPU 0 instructions: 30000001 cycles: 10345982 heartbeat IPC: 2.90061 cumulative IPC: 2.89968 (Simulation time: 0 hr 0 min 56 sec) 
+Heartbeat CPU 0 instructions: 40000002 cycles: 13788987 heartbeat IPC: 2.90444 cumulative IPC: 2.90087 (Simulation time: 0 hr 1 min 14 sec) 
+Heartbeat CPU 0 instructions: 50000001 cycles: 17231305 heartbeat IPC: 2.90502 cumulative IPC: 2.9017 (Simulation time: 0 hr 1 min 33 sec) 
+
+Warmup complete CPU 0 instructions: 50000001 cycles: 17231305 (Simulation time: 0 hr 1 min 33 sec) 
+
+Heartbeat CPU 0 instructions: 60000000 cycles: 28381773 heartbeat IPC: 0.896823 cumulative IPC: 0.896823 (Simulation time: 0 hr 1 min 50 sec) 
+Heartbeat CPU 0 instructions: 70000000 cycles: 39527754 heartbeat IPC: 0.897184 cumulative IPC: 0.897004 (Simulation time: 0 hr 2 min 6 sec) 
+Heartbeat CPU 0 instructions: 80000000 cycles: 50677345 heartbeat IPC: 0.896894 cumulative IPC: 0.896967 (Simulation time: 0 hr 2 min 23 sec) 
+Heartbeat CPU 0 instructions: 90000001 cycles: 61819727 heartbeat IPC: 0.897474 cumulative IPC: 0.897094 (Simulation time: 0 hr 2 min 40 sec) 
+Heartbeat CPU 0 instructions: 100000002 cycles: 72955172 heartbeat IPC: 0.898033 cumulative IPC: 0.897282 (Simulation time: 0 hr 2 min 56 sec) 
+Finished CPU 0 instructions: 50000001 cycles: 55723867 cumulative IPC: 0.897282 (Simulation time: 0 hr 2 min 56 sec) 
+
+ChampSim completed all CPUs
+
+Region of Interest Statistics
+
+CPU 0
+XXX cumulative-IPC 0.897282
+XXX instructions 50000001
+XXX cycles 55723867
+L1D TOTAL     ACCESS:   22194340  HIT:   21698820  MISS:     495520
+L1D LOAD      ACCESS:    7566873  HIT:    7345736  MISS:     221137
+L1D RFO       ACCESS:    7215856  HIT:    7148920  MISS:      66936
+L1D PREFETCH  ACCESS:    7411611  HIT:    7204164  MISS:     207447
+L1D WRITEBACK ACCESS:          0  HIT:          0  MISS:          0
+L1D PREFETCH  REQUESTED:    7577370  ISSUED:    7494125
+XXX L1D-USEFUL 51178
+XXX L1D-USELESS 156273
+L1D AVERAGE MISS LATENCY: 14.999 cycles
+L1I TOTAL     ACCESS:   14363878  HIT:    9281760  MISS:    5082118
+L1I LOAD      ACCESS:    9234044  HIT:    6319652  MISS:    2914392
+L1I RFO       ACCESS:          0  HIT:          0  MISS:          0
+L1I PREFETCH  ACCESS:    5129834  HIT:    2962108  MISS:    2167726
+L1I WRITEBACK ACCESS:          0  HIT:          0  MISS:          0
+L1I PREFETCH  REQUESTED:    9397552  ISSUED:    9397552
+XXX L1I-USEFUL 1305940
+XXX L1I-USELESS 861804
+L1I AVERAGE MISS LATENCY: 13.3817 cycles
+L2C TOTAL     ACCESS:    8164004  HIT:    8163929  MISS:         75
+L2C LOAD      ACCESS:    2913729  HIT:    2913728  MISS:          1
+L2C RFO       ACCESS:      66936  HIT:      66936  MISS:          0
+L2C PREFETCH  ACCESS:    5003113  HIT:    5003039  MISS:         74
+L2C WRITEBACK ACCESS:     180226  HIT:     180226  MISS:          0
+L2C PREFETCH  REQUESTED:    5414142  ISSUED:    5414142
+XXX L2C-USEFUL 37
+XXX L2C-USELESS 0
+L2C AVERAGE MISS LATENCY: 56.08 cycles
+LLC TOTAL     ACCESS:     638971  HIT:     638649  MISS:        322
+LLC LOAD      ACCESS:          0  HIT:          0  MISS:          0
+LLC RFO       ACCESS:          0  HIT:          0  MISS:          0
+LLC PREFETCH  ACCESS:     638971  HIT:     638649  MISS:        322
+LLC WRITEBACK ACCESS:          0  HIT:          0  MISS:          0
+LLC PREFETCH  REQUESTED:          0  ISSUED:          0
+XXX LLC-USEFUL 0
+XXX LLC-USELESS 0
+LLC AVERAGE MISS LATENCY: 165.553 cycles
+Major fault: 0 Minor fault: 357
+XXX disp-0 2415478
+XXX disp-1 0
+XXX disp-2 0
+XXX disp-3 248002
+XXX disp-4 889142
+XXX disp-5 631415
+XXX disp-6 1230581
+XXX disp-7 678138
+XXX disp-8 794532
+XXX disp-9 516996
+XXX disp-10 454149
+XXX disp-11 328402
+XXX disp-12 118599
+XXX disp-13 170109
+XXX disp-14 190390
+XXX disp-15 136215
+XXX disp-16 163190
+XXX disp-17 66066
+XXX disp-18 316215
+XXX disp-19 78929
+XXX disp-20 151394
+XXX disp-21 66182
+XXX disp-22 13212
+XXX disp-23 422789
+XXX disp-24 0
+XXX disp-25 0
+XXX disp-26 0
+XXX disp-27 0
+XXX disp-28 0
+XXX disp-29 0
+XXX disp-30 0
+XXX disp-31 0
+XXX disp-32 0
+XXX disp-33 0
+XXX disp-34 0
+XXX disp-35 0
+XXX disp-36 0
+XXX disp-37 0
+XXX disp-38 0
+XXX disp-39 0
+XXX disp-40 0
+XXX disp-41 0
+XXX disp-42 0
+XXX disp-43 0
+XXX disp-44 0
+XXX disp-45 0
+XXX disp-46 0
+XXX disp-47 0
+XXX disp-48 0
+XXX disp-49 0
+XXX disp-50 0
+XXX disp-51 0
+XXX disp-52 0
+XXX disp-53 0
+XXX disp-54 0
+XXX disp-55 0
+XXX disp-56 0
+XXX disp-57 0
+XXX disp-58 0
+XXX disp-59 0
+XXX disp-60 0
+XXX disp-61 0
+XXX disp-62 0
+XXX disp-63 0
+XXX disp-64 0
+XXX disp-65 0
+XXX diffBits-0 2415478
+XXX diffBits-1 0
+XXX diffBits-2 98132
+XXX diffBits-3 374514
+XXX diffBits-4 508494
+XXX diffBits-5 905589
+XXX diffBits-6 711447
+XXX diffBits-7 635229
+XXX diffBits-8 757633
+XXX diffBits-9 528338
+XXX diffBits-10 477588
+XXX diffBits-11 536352
+XXX diffBits-12 242548
+XXX diffBits-13 218866
+XXX diffBits-14 118276
+XXX diffBits-15 105997
+XXX diffBits-16 189548
+XXX diffBits-17 59491
+XXX diffBits-18 158545
+XXX diffBits-19 410933
+XXX diffBits-20 124944
+XXX diffBits-21 79394
+XXX diffBits-22 422789
+XXX diffBits-23 0
+XXX diffBits-24 0
+XXX diffBits-25 0
+XXX diffBits-26 0
+XXX diffBits-27 0
+XXX diffBits-28 0
+XXX diffBits-29 0
+XXX diffBits-30 0
+XXX diffBits-31 0
+XXX diffBits-32 0
+XXX diffBits-33 0
+XXX diffBits-34 0
+XXX diffBits-35 0
+XXX diffBits-36 0
+XXX diffBits-37 0
+XXX diffBits-38 0
+XXX diffBits-39 0
+XXX diffBits-40 0
+XXX diffBits-41 0
+XXX diffBits-42 0
+XXX diffBits-43 0
+XXX diffBits-44 0
+XXX diffBits-45 0
+XXX diffBits-46 0
+XXX diffBits-47 0
+XXX diffBits-48 0
+XXX diffBits-49 0
+XXX diffBits-50 0
+XXX diffBits-51 0
+XXX diffBits-52 0
+XXX diffBits-53 0
+XXX diffBits-54 0
+XXX diffBits-55 0
+XXX diffBits-56 0
+XXX diffBits-57 0
+XXX diffBits-58 0
+XXX diffBits-59 0
+XXX diffBits-60 0
+XXX diffBits-61 0
+XXX diffBits-62 0
+XXX diffBits-63 0
+XXX diffBits-64 0
+XXX diffBits-65 0
+CPU 0 L1D next line prefetcher final stats
+
+DRAM Statistics
+ CHANNEL 0
+ RQ ROW_BUFFER_HIT:         64  ROW_BUFFER_MISS:        258
+ DBUS_CONGESTED:         62
+ WQ ROW_BUFFER_HIT:          0  ROW_BUFFER_MISS:          0  FULL:          0
+
+ AVG_CONGESTED_CYCLE: 6
+
+CPU 0 Branch Prediction Accuracy: 94.2291% MPKI: 9.81608 Average ROB Occupancy at Mispredict: 39.9202
+
+XXX total_mispredicts 490804
+XXX total_target_mispredicts1 341784
+XXX total_target_mispredicts2 3306
+XXX total_direction_mispredicts 145714
+XXX mispredict_on_btb_hit 341752
+XXX NOT_BRANCH: 0
+XXX BRANCH_DIRECT_JUMP: 3288
+XXX BRANCH_INDIRECT: 0
+XXX BRANCH_CONDITIONAL: 0
+XXX BRANCH_DIRECT_CALL: 2
+XXX BRANCH_INDIRECT_CALL: 32860
+XXX BRANCH_RETURN: 305602
+XXX BRANCH_OTHER: 0
+Branch types
+NOT_BRANCH: 41494811 82.9896%
+BRANCH_DIRECT_JUMP: 491306 0.982612%
+BRANCH_INDIRECT: 0 0%
+BRANCH_CONDITIONAL: 5595232 11.1905%
+BRANCH_DIRECT_CALL: 1028407 2.05681%
+BRANCH_INDIRECT_CALL: 180755 0.36151%
+BRANCH_RETURN: 1209170 2.41834%
+BRANCH_OTHER: 0 0%
+
+XXX BTB_reads: 5889891
+XXX BTB_writes: 3336
+XXX PageBTB_reads: 0
+XXX PageBTB_writes: 0
+XXX PageBTB_readsBeforeWrite: 0
+XXX RegionBTB_reads: 0
+XXX RegionBTB_writes: 0
+XXX RegionBTB_readsBeforeWrite: 0
+XXX BTB_4D_Hits 489104
+XXX BTB_6D_Hits 811402
+XXX BTB_8D_Hits 956405
+XXX BTB_12D_Hits 737609
+XXX BTB_18D_Hits 584319
+XXX BTB_25D_Hits 251415
+XXX BTB_46D_Hits 0
+XXX BTB_Ret_Hits 1209170
+XXX BTB_4D_Misses 0
+XXX BTB_6D_Misses 0
+XXX BTB_8D_Misses 10
+XXX BTB_12D_Misses 3293
+XXX BTB_18D_Misses 5
+XXX BTB_25D_Misses 18
+XXX BTB_46D_Misses 10
+XXX BTB_Ret_Misses 0
+XXX Num_unique_branches 2634
+total instructions: 0
+wc,tif,trb
+1,1,10
+5,23,41
+1,0,0
+3,6,29
+5,15,26
+3,9,0
+5,6,50
+4,18,38
+3,8,15
+5,12,61
+4,21,41
+5,15,28
+4,7,27
+2,2,13
+4,16,39
+2,1,19
+1,1,3
+6,16,20
+5,12,27
+3,7,22
+4,7,18
+1,0,5
+2,4,28
+5,12,29
+4,9,43
+3,1,15
+1,0,0
+2,3,13
+1,0,5
+2,4,12
+6,30,52
+1,0,0
+4,1,38
+1,7,12
+5,9,32
+3,5,4
+1,0,4
+2,10,34
+1,1,8
+4,11,19
+4,7,43
+3,0,14
+5,19,56
+5,23,64
+6,20,30
+2,1,14
+6,6,30
+2,3,33
+2,1,3
+4,4,45
+6,9,62
+3,0,20
+4,1,36
+1,0,0
+2,4,24
+0,0,0
+4,7,11
+10,40,72
+3,1,15
+4,16,12
+6,10,36
+1,0,11
+3,7,44
+6,19,61
+5,9,34
+2,1,29
+6,9,62
+1,0,0
+1,0,5
+5,14,54
+2,0,4
+5,29,42
+3,0,18
+4,5,19
+7,12,61
+6,19,32
+3,11,38
+4,9,30
+6,6,59
+4,6,10
+8,28,52
+6430,64212,57929
+2,1,15
+1,0,4
+3,5,30
+6,14,37
+3,1,27
+5,6,25
+2,1,8
+2,2,9
+4,11,40
+2,10,20
+4,8,17
+8,58,56
+6,12,89
+2,0,7
+3,8,23
+5,6,33
+4,10,8
+3,16,39
+3,1,13
+4,6,47
+3,5,10
+2,0,4
+7,34,46
+2,1,13
+2,6,22
+5,5,20
+2,6,24
+2,4,32
+3,3,36
+7,28,27
+7,15,40
+4,10,43
+5,23,45
+7,29,47
+3,8,18
+2,1,10
+3,0,23
+4,8,31
+4,20,44
+2,0,7
+5,9,16
+2,2,18
+4,18,42
+6,14,48
+4,2,22
+4,4,20
+5,7,36
+3,8,27
+3,3,22
+1,1,6
+4,3,21
+1,1,6
+4,5,40
+6,30,34
+5,7,67
+3,1,14
+1,0,19
+5,18,39
+5,11,24
+7,30,46
+5,11,24
+3,5,8
+5,10,40
+1,0,0
+3,3,24
+3,4,17
+4,6,12
+3,9,28
+2,1,27
+1,1,6
+4,4,16
+3,4,23
+2,5,21
+2,6,38
+5,11,25
+3,14,39
+3,12,39
+3,3,13
+2,1,14
+4,14,41
+2,0,5
+5,9,53
+4,3,43
+4,13,45
+11,36,212
+2,6,24
+4,16,12
+3,3,6
+4,5,27
+4,10,10
+2,13,31
+4,10,6
+2,0,16
+3,1,13
+2,1,6
+2,5,18
+4,18,35
+6,11,60
+3,3,13
+4,4,27
+2,0,26
+11,14,163
+2,0,9
+3,1,17
+6,8,48
+2,5,29
+2,0,26
+4,13,39
+5,11,34
+3,11,28
+2,2,7
+3,2,16
+1,0,9
+4,3,18
+4,1,38
+5,9,39
+6,14,50
+3,5,6
+1,6,13
+2,0,9
+1,0,0
+3,6,18
+7,26,43
+8,45,35
+5,5,35
+5,13,68
+5,26,27
+5,42,77
+4,7,17
+4,8,47
+3,21,30
+5,8,52
+5,20,48
+6,9,60
+3,9,60
+6,24,67
+26,175,236
+3,9,60
+4,18,28
+7,21,52
+3,8,18
+2,2,16
+2,6,13
+10,28,108
+2,1,14
+2,0,11
+4,2,18
+2,3,16
+6,27,33
+1,0,0
+2,1,17
+3,2,18
+7,16,53
+4,13,45
+1,1,10
+7,31,24
+2,0,9
+4,17,32
+1,1,3
+8,57,68
+3,19,34
+5,9,59
+5,11,20
+3,1,11
+1,3,22
+2,0,9
+4,8,31
+6,18,96
+7,23,52
+5,6,31
+2,4,15
+5,18,60
+3,1,19
+4,10,76
+7,28,45
+2,2,7
+2,5,31
+7,17,38
+5,9,42
+3,0,9
+3,4,27
+8,22,58
+5,9,56
+4,2,29
+6,9,41
+4,4,27
+4,2,30
+5,8,65
+8,36,44
+3,2,23
+5,15,20
+3,6,3
+4,6,39
+5,18,40
+4,5,41
+7,16,53
+4,4,20
+2,1,15
+3,8,46
+3,0,25
+7,32,43
+3,1,30
+2,0,16
+7,30,53
+6,14,50
+4,7,31
+5,20,55
+5,4,43
+5,7,45
+4,7,53
+8,32,64
+4,7,13
+2,1,6
+6,10,63
+3,4,19
+7,16,39
+4,4,24
+4,7,42
+2,0,24
+2,0,9
+4,4,38
+8,39,41
+3,1,8
+6,8,36
+3,10,34
+5,9,35
+4,5,43
+2,1,29
+4,7,34
+5,4,38
+1,0,9
+1,0,7
+3,8,53
+5,24,35
+5,9,46
+3,1,19
+3,1,10
+0,0,0
+4,4,31
+4,1,40
+2,0,4
+5,0,35
+4,5,37
+7,28,47
+5,12,13
+3,0,16
+3,7,22
+5,14,80
+4,3,24
+7,21,54
+3,1,34
+5,5,31
+8,40,40
+2,4,28
+6,11,45
+6,18,46
+4,10,6
+7,23,38
+3,3,13
+5,7,45
+4,3,30
+3,4,40
+6,22,49
+2,0,9
+1,0,11
+7,20,73
+4,10,20
+4,1,22
+6,15,29
+4,6,18
+5,10,40
+1,0,0
+6,22,44
+1,0,19
+7,32,101
+5,17,8
+3,3,18
+4,10,32
+5,28,36
+3,6,29
+2,1,10
+2,0,24
+5,13,12
+3,5,23
+7,34,27
+4,8,41
+4,10,25
+0,0,0
+7,25,48
+3,8,45
+1,0,0
+4,16,48
+3,4,49
+5,22,46
+7,14,61
+3,1,17
+3,0,25
+3,7,48
+1,1,10
+2,1,12
+4,28,36
+3,7,32
+5,16,48
+7,8,69
+8,16,64
+2,1,19
+5,8,54
+7,28,27
+4,18,46
+2,1,15
+2,1,6
+13,47,71
+4,9,30
+10,49,99
+5,17,31
+6,17,62
+7,28,27
+4,14,48
+5,13,33
+2,7,16
+8,22,64
+6,9,41
+7,30,45
+8,26,54
+0,0,0
+4,4,27
+5,9,38
+4,20,37
+4,14,46
+6,6,30
+6,4,40
+2,1,6
+4,9,40
+6,30,46
+3,5,10
+4,4,37
+2,0,7
+4,11,30
+7,25,51
+4,7,38
+9,42,130
+5,5,40
+3,2,11
+5,15,56
+5,5,63
+0,0,0
+9,52,78
+4,6,40
+6,9,55
+3,6,18
+9,71,45
+4,6,12
+3,3,34
+4,2,32
+6,21,50
+4,13,36
+3,2,25
+3,10,38
+4,23,57
+5,10,25
+8,27,73
+3,5,6
+6,25,41
+6,22,49
+7,30,80
+5,12,59
+4,7,46
+4,14,32
+1,0,7
+2,3,27
+5,10,29
+2,11,33
+7,22,49
+3,5,8
+2,3,27
+2,6,17
+2,3,21
+5,9,56
+8,31,73
+4,14,37
+3,0,18
+5,5,43
+3,2,35
+2,6,17
+9,38,67
+1,0,0
+3,2,20
+4,2,19
+4,9,23
+5,2,29
+3,4,32
+4,20,28
+3,13,31
+4,9,44
+5,7,80
+6,15,31
+5,11,41
+6,15,51
+1,0,7
+9,48,81
+6,12,48
+3,1,12
+4,8,54
+7,8,47
+4,14,43
+6,15,50
+6,25,43
+8,15,92
+8,18,80
+6,23,41
+6,14,32
+7,14,55
+3,3,27
+4,9,55
+3,12,32
+6,36,80
+6,5,31
+3,2,25
+4,13,40
+7,34,27
+3,20,35
+6,20,46
+10,69,109
+6,13,101
+4,19,40
+6,16,73
+5,17,36
+9,53,75
+8,47,43
+5,43,62
