@@ -29,24 +29,60 @@
 #!/bin/bash
 
 # Directory containing the trace files
-directory="./old_results_50M"
+directory="./results_50M"
 
-# Process each file in the directory
+# Arrays to store values
+declare -a names=()
+declare -a accuracies=()
+declare -a mpkis=()
+declare -a robs=()
+
+# Process each file
 for file in "$directory"/*.txt; do
     if [ -f "$file" ]; then
-        # Extract the line containing Branch Prediction Accuracy
         line=$(grep "CPU 0 Branch Prediction Accuracy" "$file")
         
         if [ ! -z "$line" ]; then
-            # Extract filename without extension and path
+            # Store filename
             filename=$(basename "$file" | cut -d'.' -f1)
+            names+=("$filename")
             
-            # Extract accuracy and MPKI using awk
-            accuracy=$(echo "$line" | awk -F'[: %]+' '{print $6}')
+            # Extract accuracy (remove % sign)
+            accuracy=$(echo "$line" | awk '{print $6}' | sed 's/%//')
+            
+            # Extract MPKI
             mpki=$(echo "$line" | awk '{print $8}')
             
-            # Print in desired format
-            echo "Name: $filename Accuracy: $accuracy MPKI: $mpki"
+            # Extract ROB value (last number in the line)
+            rob=$(echo "$line" | awk '{for(i=NF;i>=1;i--) if($i+0==$i) {print $i; exit}}')
+            
+            # Store values in arrays
+            accuracies+=("$accuracy")
+            mpkis+=("$mpki")
+            robs+=("$rob")
         fi
     fi
+done
+
+# Print Accuracies
+echo "Branch Prediction Accuracies:"
+echo "----------------------------"
+for i in "${!names[@]}"; do
+    printf "${accuracies[$i]}\n"
+done
+echo -e "\n"
+
+# Print MPKIs
+echo "Branch MPKI Values:"
+echo "------------------"
+for i in "${!names[@]}"; do
+    printf "${mpkis[$i]}\n"
+done
+echo -e "\n"
+
+# Print ROB Occupancies
+echo "Average ROB Occupancies at Mispredict:"
+echo "-------------------------------------"
+for i in "${!names[@]}"; do
+    printf "${robs[$i]}\n"
 done

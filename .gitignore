@@ -1,0 +1,7 @@
+# Ignore client and server shell scripts
+client_*.sh
+server_*.sh
+
+# Ignore logs and bin directories
+/results/
+/bin/

@@ -15,7 +15,7 @@ void O3_CPU::read_from_trace()
     // actual processors do not work like this but for easier implementation,
     // we read instruction traces and virtually add them in the ROB
     // note that these traces are not yet translated and fetched
-
+    // skip cycle if its true and update it with false
     if (skip_next_cycle)
     {
         skip_next_cycle = false;
@@ -25,6 +25,8 @@ void O3_CPU::read_from_trace()
 
     uint8_t continue_reading = 1;
     uint32_t num_reads = 0;
+
+    // FETCH_WIDTH value is set to 6 in ooo_cpu.h file
     instrs_to_read_this_cycle = FETCH_WIDTH;
 
     // first, read PIN trace

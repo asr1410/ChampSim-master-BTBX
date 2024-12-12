@@ -33,10 +33,15 @@ struct BTB_outcome {
 
 class O3_CPU {
 public:
-  int trb[512] = {0};
-  int tif[512] = {0};
-  int wc[512] = {0};
+  long long int grb[512] = {0};
+  long long int gif[512] = {0};
+  long long int trb[512] = {0};
+  long long int tif[512] = {0};
+  long long int wc[512] = {0};
+  long long int limit[512] = {0};
+  long long int changes[3] = {0};
   long long gic = 0;
+  long long lic = 0;
   bool skip_next_cycle;
   uint32_t cpu;
 
@@ -50,8 +55,8 @@ public:
   uint64_t instr_unique_id, completed_executions, begin_sim_cycle, begin_sim_instr, last_sim_cycle, last_sim_instr, finish_sim_cycle, finish_sim_instr, warmup_instructions, simulation_instructions, instrs_to_read_this_cycle, instrs_to_fetch_this_cycle, next_print_instruction, num_retired;
   uint32_t inflight_reg_executions, inflight_mem_executions, num_searched;
   uint32_t next_ITLB_fetch;
-  CORE_BUFFER IFETCH_BUFFER{"IFETCH_BUFFER", FETCH_WIDTH * 2};
-  // CORE_BUFFER IFETCH_BUFFER{"IFETCH_BUFFER", 128};
+  // CORE_BUFFER IFETCH_BUFFER{"IFETCH_BUFFER", FETCH_WIDTH * 2};
+  CORE_BUFFER IFETCH_BUFFER{"IFETCH_BUFFER", 128};
   CORE_BUFFER DECODE_BUFFER{"DECODE_BUFFER", DECODE_WIDTH * 3};
   CORE_BUFFER ROB{"ROB", ROB_SIZE};
   LOAD_STORE_QUEUE LQ{"LQ", LQ_SIZE}, SQ{"SQ", SQ_SIZE};
@@ -224,6 +229,7 @@ public:
   int prefetch_code_line(uint64_t pf_v_addr);
   ~O3_CPU() {
     cout << "total instructions: " << gic << endl;
+    cout << changes[0] << "," << changes[1] << "," << changes[2] << endl;
     cout << "wc,tif,trb" << endl;
     for(int i = 0; i < 512; i++) {
       cout << wc[i] << "," << tif[i] << "," << trb[i] << endl;

@@ -33,9 +33,9 @@ struct BTB_outcome {
 
 class O3_CPU {
 public:
-  long long int trb[512] = {0};
-  long long int tif[512] = {0};
-  long long int wc[512] = {0};
+  int trb[512] = {0};
+  int tif[512] = {0};
+  int wc[512] = {0};
   long long gic = 0;
   bool skip_next_cycle;
   uint32_t cpu;

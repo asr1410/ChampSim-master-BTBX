@@ -58,36 +58,16 @@ struct BTB {
     return tag;
   }
 
-  std::pair<BTBEntry*, int> get_BTBentry(uint64_t ip) {
-    std::pair<BTBEntry*, int> btb_entry;
+  BTBEntry *get_BTBentry(uint64_t ip) {
+    BTBEntry *entry = NULL;
     int idx = index(ip);
     uint64_t tag = get_tag(ip);
-
     for (uint32_t i = 0; i < theBTB[idx].size(); i++) {
       if (theBTB[idx][i].tag == tag) {
-        return std::make_pair(&(theBTB[idx][i]), 0);
+        return &(theBTB[idx][i]);
       }
     }
-
-    if (idx > 0) {
-      int pidx = idx - 1;
-      for (uint32_t i = 0; i < theBTB[pidx].size(); i++) {
-        if (theBTB[pidx][i].tag == tag) {
-          return std::make_pair(&(theBTB[pidx][i]), -1);
-        }
-      }
-    }
-
-    uint32_t nidx = idx + 1;
-    if (nidx < numSets) {
-      for (uint32_t i = 0; i < theBTB[nidx].size(); i++) {
-        if (theBTB[nidx][i].tag == tag) {
-          return std::make_pair(&(theBTB[nidx][i]), 1);
-        }
-      }
-    }
-
-    return btb_entry;
+    return entry;
   }
 
   void update_BTB(uint64_t ip, uint8_t b_type, uint64_t target, uint8_t taken, uint64_t lru_counter, int diff) {
@@ -127,7 +107,7 @@ struct BTB {
     }
   }
 
-  std::pair<uint64_t, std::pair<uint64_t, uint64_t>> get_lru_value(uint64_t ip) {
+  pair<uint64_t, pair<uint64_t, uint64_t>> get_lru_value(uint64_t ip) {
     int idx = index(ip);
     uint64_t clru_value;
     if (theBTB[idx].size() < assoc) {
@@ -143,7 +123,7 @@ struct BTB {
 
     uint64_t plru_value;
     int pidx = idx - 1;
-    if (idx > 0) {
+    if(idx > 0) {
       if (theBTB[pidx].size() < assoc) {
         plru_value = 0;
       } else {
@@ -159,8 +139,8 @@ struct BTB {
     }
 
     uint64_t nlru_value;
-    uint32_t nidx = idx + 1;
-    if (nidx < numSets) {
+    int nidx = idx + 1;
+    if(nidx < numSets) {
       if (theBTB[nidx].size() < assoc) {
         nlru_value = 0;
       } else {
@@ -174,7 +154,7 @@ struct BTB {
     } else {
       nlru_value = 9999999999;
     }
-    return std::make_pair(clru_value, std::make_pair(plru_value, nlru_value));
+    return make_pair(clru_value, make_pair(plru_value, nlru_value));
   }
 };
 
@@ -272,32 +252,32 @@ int convert_partitionID_to_offsetBits(int partition) {
   assert(0);
 }
 
-std::pair<int, int> get_lru_partition(int start_partitionID, uint64_t ip) {
-  std::pair<int, std::pair<int, int>> lru_partition = std::make_pair(start_partitionID, std::make_pair(9999999999, 9999999999));
-  std::pair<uint64_t, std::pair<uint64_t, uint64_t>> lru_value = btb_partition[start_partitionID].get_lru_value(ip);
+pair<int, int> get_lru_partition(int start_partitionID, uint64_t ip) {
+  pair<int, pair<int, int>> lru_partition = make_pair(start_partitionID, make_pair(9999999999, 9999999999));
+  pair<uint64_t, pair<uint64_t, uint64_t>> lru_value = btb_partition[start_partitionID].get_lru_value(ip);
   for (int i = start_partitionID + 1; i < NUM_BTB_PARTITIONS; i++) {
-    std::pair<uint64_t, std::pair<uint64_t, uint64_t>> partition_lru_value = btb_partition[i].get_lru_value(ip);
+    pair<uint64_t, pair<uint64_t, uint64_t>> partition_lru_value = btb_partition[i].get_lru_value(ip);
 
     if (partition_lru_value.first < lru_value.first) {
       lru_partition.first = i;
       lru_value.first = partition_lru_value.first;
     }
-    if (partition_lru_value.second.first < lru_value.second.first) {
+    if(partition_lru_value.second.first < lru_value.second.first) {
       lru_partition.second.first = i;
       lru_value.second.first = partition_lru_value.second.first;
     }
-    if (partition_lru_value.second.second < lru_value.second.second) {
+    if(partition_lru_value.second.second < lru_value.second.second) {
       lru_partition.second.second = i;
       lru_value.second.second = partition_lru_value.second.second;
     }
   }
-  int min_lru_partition = std::min(lru_partition.first, std::min(lru_partition.second.first, lru_partition.second.second));
-  if (min_lru_partition == lru_partition.first) {
-    return std::make_pair(lru_partition.first, 0);
-  } else if (min_lru_partition == lru_partition.second.first) {
-    return std::make_pair(lru_partition.second.first, -1);
+  int min_lru_partition = min(lru_partition.first, min(lru_partition.second.first, lru_partition.second.second));
+  if(min_lru_partition == lru_partition.first) {
+    return make_pair(lru_partition.first, 0);
+  } else if(min_lru_partition == lru_partition.second.first) {
+    return make_pair(lru_partition.second.first, -1);
   }
-  return std::make_pair(lru_partition.second.second, 1);
+  return make_pair(lru_partition.second.second, 1);
 }
 
 void O3_CPU::initialize_btb() {
@@ -329,17 +309,16 @@ void O3_CPU::initialize_btb() {
 
 BTB_outcome O3_CPU::btb_prediction(uint64_t ip, uint8_t branch_type) {
   gic++;
-  std::pair<BTBEntry*, int> btb_entry;
+  BTBEntry *btb_entry;
 
   for (int i = 0; i < NUM_BTB_PARTITIONS; i++) {
     btb_entry = btb_partition[i].get_BTBentry(ip);
-    if (btb_entry.first) {
-      phit[btb_entry.second + 1]++;
+    if (btb_entry) {
       break;
     }
   }
 
-  if (btb_entry.first == NULL) {
+  if (btb_entry == NULL) {
     if (branch_type == BRANCH_DIRECT_CALL || branch_type == BRANCH_INDIRECT_CALL) {
       push_basic_btb_ras(cpu, ip);
     }
@@ -348,7 +327,7 @@ BTB_outcome O3_CPU::btb_prediction(uint64_t ip, uint8_t branch_type) {
   }
 
   branch_type = NOT_BRANCH;
-  branch_type = btb_entry.first->branch_type;
+  branch_type = btb_entry->branch_type;
 
   if ((branch_type == BRANCH_DIRECT_CALL) || (branch_type == BRANCH_INDIRECT_CALL)) {
     push_basic_btb_ras(cpu, ip);
@@ -360,7 +339,7 @@ BTB_outcome O3_CPU::btb_prediction(uint64_t ip, uint8_t branch_type) {
     BTB_outcome outcome = {target, BRANCH_RETURN, 0};
     return outcome;
   } else {
-    BTB_outcome outcome = {btb_entry.first->target_ip, branch_type, 0};
+    BTB_outcome outcome = {btb_entry->target_ip, branch_type, 0};
     return outcome;
   }
 
@@ -379,18 +358,17 @@ void O3_CPU::update_btb(uint64_t ip, uint64_t branch_target, uint8_t taken, uint
   if (taken == false)
     return;
 
-  std::pair<BTBEntry*, int> btb_entry;
+  BTBEntry *btb_entry;
   int partitionID = -1;
   for (int i = 0; i < NUM_BTB_PARTITIONS; i++) {
     btb_entry = btb_partition[i].get_BTBentry(ip);
-    if (btb_entry.first) {
-      uhit[btb_entry.second + 1]++;
+    if (btb_entry) {
       partitionID = i;
       break;
     }
   }
 
-  if (btb_entry.first == NULL) {
+  if (btb_entry == NULL) {
     BTB_writes++;
     int num_bits;
     if (branch_type == BRANCH_RETURN) {
@@ -406,10 +384,10 @@ void O3_CPU::update_btb(uint64_t ip, uint64_t branch_target, uint8_t taken, uint
     assert(num_bits >= 0 && num_bits < 66);
 
     int smallest_offset_partition_id = convert_offsetBits_to_partitionID(num_bits);
-    std::pair<int, int> partition = get_lru_partition(smallest_offset_partition_id, ip);
+    pair<int, int> partition = get_lru_partition(smallest_offset_partition_id, ip);
     assert(partition.first < NUM_BTB_PARTITIONS);
 
-    if (partition.first != 8) {
+    if(partition.first != 8) {
       changes[partition.second + 1]++;
       int idx = btb_partition[partition.first].index(ip);
       idx += partition.second;
@@ -422,7 +400,7 @@ void O3_CPU::update_btb(uint64_t ip, uint64_t branch_target, uint8_t taken, uint
     basic_btb_lru_counter[cpu]++;
   } else {
     assert(partitionID != -1);
-    btb_partition[partitionID].update_BTB(ip, branch_type, branch_target, taken, basic_btb_lru_counter[cpu], btb_entry.second);
+    btb_partition[partitionID].update_BTB(ip, branch_type, branch_target, taken, basic_btb_lru_counter[cpu], 0);
     basic_btb_lru_counter[cpu]++;
   }
 }
