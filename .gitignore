@@ -9,3 +9,8 @@ inc/champsim.h.bak
 
 bin/
 obj/
+results/
+
+client_*.sh
+server_*.sh
+*.o
