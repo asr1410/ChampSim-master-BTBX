@@ -56,12 +56,22 @@ btb[0]=convBTB
 btb[1]=pdede
 btb[2]=BTBX
 
-for ((j=0;j<2;j=j+1)); do
-    for ((i=0;i<43;i=i+1)); do
-	for ((k=0;k<3;k=k+1)); do
-            echo "sbatch --partition=CPUQ --account=share-ie-idi --nodes=1 --ntasks-per-node=1 --mem=3GB --time=0-0:30:00 --job-name=${bench[i]}_${prefetch[j]}_${btb[k]} scripts/${bench[i]}_${prefetch[j]}_${btb[k]}.sh"
-            #sbatch --partition=CPUQ --account=share-ie-idi --nodes=1 --ntasks-per-node=1 --mem=3GB --time=0-0:30:00 --job-name=${bench[i]}_${prefetch[j]}_${btb[k]} scripts/${bench[i]}_${prefetch[j]}_${btb[k]}.sh
-	    <cluster_launch_command_here>
-	done
+for ((j=1; j<2; j=j+1)); do
+    for ((i=8; i<43; i=i+4)); do
+        for ((k=2; k<3; k=k+1)); do
+            echo "Running: ./${bench[i]}_${prefetch[j]}_${btb[k]}.sh"
+            # Execute the script directly
+            ./${bench[i]}_${prefetch[j]}_${btb[k]}.sh
+        done
     done
-done 
+done
+
+# for ((j=0;j<2;j=j+1)); do
+#     for ((i=0;i<43;i=i+1)); do
+# 	for ((k=0;k<3;k=k+1)); do
+#             echo "sbatch --partition=CPUQ --account=share-ie-idi --nodes=1 --ntasks-per-node=1 --mem=3GB --time=0-0:30:00 --job-name=${bench[i]}_${prefetch[j]}_${btb[k]} scripts/${bench[i]}_${prefetch[j]}_${btb[k]}.sh"
+#             #sbatch --partition=CPUQ --account=share-ie-idi --nodes=1 --ntasks-per-node=1 --mem=3GB --time=0-0:30:00 --job-name=${bench[i]}_${prefetch[j]}_${btb[k]} scripts/${bench[i]}_${prefetch[j]}_${btb[k]}.sh
+# 	    <cluster_launch_command_here>
+# 	done
+#     done
+# done 

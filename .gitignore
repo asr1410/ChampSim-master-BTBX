@@ -10,6 +10,7 @@ inc/champsim.h.bak
 bin/
 obj/
 results/
+dpc3_traces/
 
 client_*.sh
 server_*.sh

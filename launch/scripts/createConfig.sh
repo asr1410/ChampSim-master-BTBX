@@ -4,7 +4,7 @@ declare -a bench
 declare -a prefetch
 declare -a btb
 
-PATH_TO_CHAMPSIM=
+PATH_TO_CHAMPSIM=/ChampSim-master-BTBX
 
 bench[0]=client_001
 bench[1]=client_002
@@ -58,9 +58,9 @@ btb[1]=pdede
 btb[2]=BTBX
 
 
-for ((j=0;j<2;j=j+1)); do
-    for ((i=0;i<43;i=i+1)); do
-	for ((k=0;k<3;k=k+1)); do
+for ((j=1;j<2;j=j+1)); do
+    for ((i=8;i<43;i=i+4)); do
+	for ((k=2;k<3;k=k+1)); do
 	    script_name="${bench[i]}_${prefetch[j]}_${btb[k]}.sh"
 	    echo "#!/bin/bash" > $script_name
 	    echo "cd ${PATH_TO_CHAMPSIM}" >> $script_name
