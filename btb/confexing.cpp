@@ -41,7 +41,10 @@ struct BTB {
   }
 
   int32_t index(uint64_t ip) {
-    return ((ip >> 2) & indexMask);
+    uint64_t fold1 = (ip >> 2) & indexMask;
+    uint64_t fold2 = (ip >> (2 + numIndexBits)) & indexMask;
+    uint64_t hash = (fold1 ^ fold2) * 0x4F4F4F4F;
+    return hash & indexMask;
   }
 
   uint64_t get_tag(uint64_t ip) {
