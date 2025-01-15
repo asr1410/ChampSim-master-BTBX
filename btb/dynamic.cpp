@@ -328,13 +328,13 @@ void O3_CPU::initialize_btb() {
 }
 
 BTB_outcome O3_CPU::btb_prediction(uint64_t ip, uint8_t branch_type) {
-  gic++;
+  // gic++;
   std::pair<BTBEntry*, int> btb_entry;
 
   for (int i = 0; i < NUM_BTB_PARTITIONS; i++) {
     btb_entry = btb_partition[i].get_BTBentry(ip);
     if (btb_entry.first) {
-      phit[btb_entry.second + 1]++;
+      // phit[btb_entry.second + 1]++;
       break;
     }
   }
@@ -384,7 +384,7 @@ void O3_CPU::update_btb(uint64_t ip, uint64_t branch_target, uint8_t taken, uint
   for (int i = 0; i < NUM_BTB_PARTITIONS; i++) {
     btb_entry = btb_partition[i].get_BTBentry(ip);
     if (btb_entry.first) {
-      uhit[btb_entry.second + 1]++;
+      // uhit[btb_entry.second + 1]++;
       partitionID = i;
       break;
     }
@@ -410,12 +410,12 @@ void O3_CPU::update_btb(uint64_t ip, uint64_t branch_target, uint8_t taken, uint
     assert(partition.first < NUM_BTB_PARTITIONS);
 
     if (partition.first != 8) {
-      changes[partition.second + 1]++;
+      // changes[partition.second + 1]++;
       int idx = btb_partition[partition.first].index(ip);
       idx += partition.second;
-      trb[idx] += num_bits;
-      tif[idx] += convert_partitionID_to_offsetBits(partition.first) - num_bits;
-      wc[idx]++;
+      // trb[idx] += num_bits;
+      // tif[idx] += convert_partitionID_to_offsetBits(partition.first) - num_bits;
+      // wc[idx]++;
     }
 
     btb_partition[partition.first].update_BTB(ip, branch_type, branch_target, taken, basic_btb_lru_counter[cpu], partition.second);
