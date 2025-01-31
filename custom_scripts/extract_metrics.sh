@@ -1,9 +1,8 @@
 #!/bin/bash
 
 # Directory containing the trace files
-directory="./results/static/perceptron/"
-# directory="./results/dynamic/perceptron/"
-# directory="./results_50M/"
+# directory="./results/"
+directory="./results_50M/"
 
 # Arrays to store values
 declare -a names=()
