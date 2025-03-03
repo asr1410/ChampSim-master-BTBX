@@ -1,71 +1,71 @@
 #!/bin/bash
 
-# Directory containing the trace files
-# directory="./results/"
-directory="./results_50M/"
+directory="./results/"
 
 # Arrays to store values
 declare -a names=()
 declare -a accuracies=()
 declare -a mpkis=()
 declare -a robs=()
+declare -a ipcs=()
 
 # Process each file
 for file in "$directory"/*.txt; do
     if [ -f "$file" ]; then
-        line=$(grep "CPU 0 Branch Prediction Accuracy" "$file")
+        branch_line=$(grep "CPU 0 Branch Prediction Accuracy" "$file")
+        ipc_line=$(grep "^XXX cumulative-IPC" "$file")
         
-        if [ ! -z "$line" ]; then
-            # Store filename
-            filename=$(basename "$file" | cut -d'.' -f1)
-            names+=("$filename")
+        if [ ! -z "$branch_line" ] && [ ! -z "$ipc_line" ]; then
+            # Extract IPC value (third field)
+            ipc=$(echo "$ipc_line" | awk '{print $3}')
             
-            # Extract accuracy (remove % sign)
-            accuracy=$(echo "$line" | awk '{print $6}' | sed 's/%//')
-            
-            # Extract MPKI
-            mpki=$(echo "$line" | awk '{print $8}')
-            
-            # Extract ROB value (last number in the line)
-            rob=$(echo "$line" | awk '{for(i=NF;i>=1;i--) if($i+0==$i) {print $i; exit}}')
+            # Store other metrics as before
+            accuracy=$(echo "$branch_line" | awk '{print $6}' | sed 's/%//')
+            mpki=$(echo "$branch_line" | awk '{print $8}')
+            rob=$(echo "$branch_line" | awk '{for(i=NF;i>=1;i--) if($i+0==$i) {print $i; exit}}')
             
             # Store values in arrays
             accuracies+=("$accuracy")
             mpkis+=("$mpki")
             robs+=("$rob")
+            ipcs+=("$ipc")
         fi
     fi
 done
 
-# Print Accuracies
+# Print each metric array on a single line
+# Accuracies
 echo -n "["
+printf "%s" "${accuracies[0]}"
 for i in "${!accuracies[@]}"; do
-    if [ $i -eq 0 ]; then
-        printf "%s" "${accuracies[$i]}"
-    else
-        printf ", %s" "${accuracies[$i]}"
-    fi
+    [ $i -eq 0 ] && continue
+    printf ", %s" "${accuracies[$i]}"
 done
 echo "]"
 
-# Print MPKIs
+# MPKIs
 echo -n "["
+printf "%s" "${mpkis[0]}"
 for i in "${!mpkis[@]}"; do
-    if [ $i -eq 0 ]; then
-        printf "%s" "${mpkis[$i]}"
-    else
-        printf ", %s" "${mpkis[$i]}"
-    fi
+    [ $i -eq 0 ] && continue
+    printf ", %s" "${mpkis[$i]}"
 done
 echo "]"
 
-# Print ROB Occupancies 
+# ROB Occupancies
 echo -n "["
+printf "%s" "${robs[0]}"
 for i in "${!robs[@]}"; do
-    if [ $i -eq 0 ]; then
-        printf "%s" "${robs[$i]}"
-    else
-        printf ", %s" "${robs[$i]}"
-    fi
+    [ $i -eq 0 ] && continue
+    printf ", %s" "${robs[$i]}"
+done
+echo "]"
+
+# IPCs
+echo -n "["
+printf "%s" "${ipcs[0]}"
+for i in "${!ipcs[@]}"; do
+    [ $i -eq 0 ] && continue
+    printf ", %s" "${ipcs[$i]}"
 done
 echo "]"
