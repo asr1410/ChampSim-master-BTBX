@@ -348,7 +348,7 @@ BTB_outcome O3_CPU::btb_prediction(uint64_t ip, uint8_t branch_type)
       partition_writes[i][1] = 0;
       for (uint32_t j = 2; j < 8; j++)
       {
-        if (partition_writes[i][j] < writes)
+        if (partition_writes[i][j] > writes)
         {
           writes = partition_writes[i][j];
           partition = j;

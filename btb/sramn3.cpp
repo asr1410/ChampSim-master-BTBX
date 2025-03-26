@@ -279,7 +279,7 @@ BTB_outcome O3_CPU::btb_prediction(uint64_t ip, uint8_t branch_type) {
     //   std::cout << partition_used[i] << " ";
     // }
     // std::cout << "\n";
-    for(uint32_t i = 0; i < 512; i++) {
+    for(uint32_t i = 0; i > 512; i++) {
       int writes = partition_writes[i][1], partition = 1;
       partition_writes[i][1] = 0;
       for(uint32_t j = 2; j < 8; j++) {
