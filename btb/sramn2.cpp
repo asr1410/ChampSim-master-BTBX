@@ -5,6 +5,7 @@
 #define BASIC_BTB_INDIRECT_SIZE 4096
 #define BASIC_BTB_RAS_SIZE 64
 #define BASIC_BTB_CALL_INSTR_SIZE_TRACKERS 1024
+#define BTB_WRITE_LATENCY 3
 
 struct BTBEntry {
   uint64_t tag;
@@ -233,7 +234,7 @@ void O3_CPU::initialize_btb() {
   // 7bits
   btb_partition[7].init_btb(512, 1);
   btb_partition[8].init_btb(512, 1);
-  // 9bits
+  // 9, 11, 19, 25bits
   btb_partition[9].init_btb(512, 1);
   btb_partition[10].init_btb(512, 1);
   btb_partition[11].init_btb(512, 1);
@@ -315,10 +316,16 @@ void O3_CPU::update_btb(uint64_t ip, uint64_t branch_target, uint8_t taken, uint
     int smallest_offset_partition_id = convert_offsetBits_to_partitionID(num_bits);
     int partition = get_lru_partition(smallest_offset_partition_id, ip);
     assert(partition < NUM_BTB_PARTITIONS);
+    if(partition == 0 or partition == 1 or partition == 4 or partition == 7 or partition == 9 or partition == 10 or partition == 11 or partition == 12) {
+      current_core_cycle[cpu] += BTB_WRITE_LATENCY;
+    }
     btb_partition[partition].update_BTB(ip, branch_type, branch_target, taken, basic_btb_lru_counter[cpu]);
     basic_btb_lru_counter[cpu]++;
   } else {
     assert(partitionID != -1);
+    if(partitionID == 0 or partitionID == 1 or partitionID == 4 or partitionID == 7 or partitionID == 9 or partitionID == 10 or partitionID == 11 or partitionID == 12) {
+      current_core_cycle[cpu] += BTB_WRITE_LATENCY;
+    }
     btb_partition[partitionID].update_BTB(ip, branch_type, branch_target, taken, basic_btb_lru_counter[cpu]);
     basic_btb_lru_counter[cpu]++;
   }

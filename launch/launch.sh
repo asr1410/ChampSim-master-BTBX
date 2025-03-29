@@ -57,7 +57,7 @@ btb[1]=pdede
 btb[2]=BTBX
 
 for ((j=1; j<2; j=j+1)); do
-    for ((i=0; i<43; i=i+1)); do
+    for ((i=8; i<43; i=i+1)); do
         for ((k=2; k<3; k=k+1)); do
             echo "Running: ./${bench[i]}_${prefetch[j]}_${btb[k]}.sh"
             # Execute the script directly
